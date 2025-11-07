@@ -1,0 +1,73 @@
+header{
+    /* border: 3px solid red; */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #243571;
+}
+
+.header-logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.marca h3{
+    color: #b1b6c0;
+    font-weight: bold;
+    font-size: 0.900rem;
+}
+.marca span{
+    color: #babec5;
+    font-size: 0.719rem;
+    font-weight: 400;
+}
+.text h3{
+    color: #b4b8c1;
+    font-weight: bold;
+    font-size: 0.881rem;
+}
+.text span{
+    color: #b4bed1;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+/* Estilo do menu navegação  */
+
+.container-nav{
+    border: 3px solid red;
+    padding: 5px;
+    
+   
+    
+}
+nav{
+    display: flex;
+    gap: 15px;
+    
+}
+.nav-colab{
+    text-decoration: none;
+    padding: 5px;
+    border: 3px solid red;
+    align-content: center;
+
+}
+.nav-colab img{
+    padding-right: 8px;
+    border: 1px solid red;
+}
+.nav-escala{
+    text-decoration: none;
+    padding: 5px;
+    border: 3px solid red;
+    align-content: center;
+    
+}
+.nav-escala img{
+    padding-right: 8px;
+    border: 1px solid red;
+    align-self:center;
+}
