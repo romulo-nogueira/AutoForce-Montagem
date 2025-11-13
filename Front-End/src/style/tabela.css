@@ -1,0 +1,76 @@
+.section-tabela {
+    padding: 2rem 3rem;
+  }
+  
+  .section-tabela h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.3rem;
+  }
+  
+  .section-tabela p {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Painel de estatísticas */
+  .cards-dashboard {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cards-dashboard .card {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cards-dashboard .card img {
+    width: 35px;
+    opacity: 0.9;
+  }
+  
+  /* Qualificações coloridas */
+  .qualificacao {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  
+  .qualificacao.solda {
+    background: #ffb74d;
+    color: #663c00;
+  }
+  
+  .qualificacao.montagem {
+    background: #dce4ff;
+    color: #2b3db8;
+  }
+  
+  .qualificacao.inspecao {
+    background: #fff176;
+    color: #5a4e00;
+  }
+  
+  .qualificacao.qualidade {
+    background: #ffcdd2;
+    color: #9c0000;
+  }
+  
+  .qualificacao.prensagem {
+    background: #e1bee7;
+    color: #5c007a;
+  }
+  
+  .qualificacao.pintura {
+    background: #b2fab4;
+    color: #004d0d;
+  }
+  

@@ -1,73 +1,83 @@
-header{
-    /* border: 3px solid red; */
-    padding: 10px;
+.header-container {
+    background: linear-gradient(90deg, #0e1a35, #112e6c);
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #243571;
-}
-
-.header-logo{
+    padding: 1rem 2rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .header-logo {
     display: flex;
-    gap: 10px;
     align-items: center;
-}
+    gap: 12px;
+  }
+  
+  .header-logo img {
+    height: 48px;
+  }
+  
+  .header-logo .marca h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  
+  .header-logo .marca span {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+  
+  .header-container .text {
+    text-align: right;
+  }
+  
+  .header-container .text span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  .header-container .text h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
 
-.marca h3{
-    color: #b1b6c0;
-    font-weight: bold;
-    font-size: 0.900rem;
-}
-.marca span{
-    color: #babec5;
-    font-size: 0.719rem;
-    font-weight: 400;
-}
-.text h3{
-    color: #b4b8c1;
-    font-weight: bold;
-    font-size: 0.881rem;
-}
-.text span{
-    color: #b4bed1;
-    font-size: 0.75rem;
-    font-weight: 400;
-}
-
-/* Estilo do menu navegação  */
-
-.container-nav{
-    border: 3px solid red;
-    padding: 5px;
-    
-   
-    
-}
-nav{
+  .container-nav {
+    background: #fff;
+    border-bottom: 1px solid #d6dff5;
+    padding: 0.5rem 2rem;
     display: flex;
-    gap: 15px;
-    
-}
-.nav-colab{
+    justify-content: center;
+  }
+  
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3d6ef7;
+    font-weight: 500;
     text-decoration: none;
-    padding: 5px;
-    border: 3px solid red;
-    align-content: center;
-
-}
-.nav-colab img{
-    padding-right: 8px;
-    border: 1px solid red;
-}
-.nav-escala{
-    text-decoration: none;
-    padding: 5px;
-    border: 3px solid red;
-    align-content: center;
-    
-}
-.nav-escala img{
-    padding-right: 8px;
-    border: 1px solid red;
-    align-self:center;
-}
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+  
+  nav a:hover {
+    background: #eaf0ff;
+  }
+  
+  nav img {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .nav-colab {
+    border-bottom: 3px solid #3d6ef7;
+  }
+  

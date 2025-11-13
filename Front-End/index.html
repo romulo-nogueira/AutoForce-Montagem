@@ -7,24 +7,73 @@
     <link rel="stylesheet" href="./src/style/global.css">
 </head>
 <body>
-    <header class="header-container">
-        <div class="header-logo">
-            <img src="src/assets/image/logo AutoForce.png" alt="" srcset="">
-            <div class="marca">
-                <h3>AutoForce</h3>
-                <span>Sistema de Gestão de Alocação de Operadores</span>
+    <!-- Essa box e responssavel pelo display grid geral(MARCOS) -->
+    <div class="grid-principal">
+
+        <header class="header-container">
+            <div class="header-logo">
+                <img src="src/assets/image/logo AutoForce.png" alt="" srcset="">
+                <div class="marca">
+                    <h3>AutoForce</h3>
+                    <span>Sistema de Gestão de Alocação de Operadores</span>
+                </div>
             </div>
-        </div>
-        <div class="text">
-            <span>Linha de Montagem</span>
-            <h3>Operação 24/7</h3>
-        </div>
-    </header>
-    <section class="container-nav">
-        <nav>
-            <div><a class="nav-colab" href=""><img src="src/assets/image/img-colaboradores.png"  alt="">Gestão de Colaboradores</a></div>
-            <div><a class="nav-escala" href=""><img src="src/assets/image/img-escala.png" alt=""> Escala Semanal</a></div>
-        </nav>
-    </section>
+            <div class="text">
+                <span>Linha de Montagem</span>
+                <h3>Operação 24/7</h3>
+            </div>
+        </header>
+        <section class="container-nav">
+            <nav>
+                <div><a class="nav-colab" href=""><img src="src/assets/image/img-colaboradores.png"  alt="">Gestão de Colaboradores</a></div>
+                <div><a class="nav-escala" href=""><img src="src/assets/image/img-escala.png" alt=""> Escala Semanal</a></div>
+            </nav>
+        </section>
+
+        <section class="section-tabela">
+            <h2>Gestão de Colaboradores</h2>
+            <p>Gerencie os operadores e suas qualificações técnicas</p>
+          
+            <!-- Painel de cards -->
+            <div class="cards-dashboard">
+              <div class="card card-blue">
+                <span>Total de Operadores</span>
+                <img src="src/assets/image/icon-operadores.png" alt="">
+                <h3 id="total-operadores">0</h3>
+              </div>
+              <div class="card card-green">
+                <span>Qualificações Únicas</span>
+                <img src="src/assets/image/icon-qualificacoes.png" alt="">
+                <h3 id="total-qualificacoes">0</h3>
+              </div>
+              <div class="card card-purple">
+                <span>Média Qualificações/Op.</span>
+                <img src="src/assets/image/icon-media.png" alt="">
+                <h3 id="media-qualificacoes">0.0</h3>
+              </div>
+            </div>
+          
+            <!-- Botão Novo Operador -->
+            <button class="btn-primary" id="btn-novo-operador">+ Novo Operador</button>
+          
+            <!-- Tabela de colaboradores -->
+            <table id="tabela-operadores">
+              <thead>
+                <tr>
+                  <th>Matrícula</th>
+                  <th>Nome</th>
+                  <th>Qualificações</th>
+                  <th>Turno Preferencial</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Linhas serão inseridas dinamicamente pelo JS -->
+              </tbody>
+            </table>
+          </section>
+          
+    </div>
+    <script src="/Back-End/script.js"></script>
 </body>
 </html>

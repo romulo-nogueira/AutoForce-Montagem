@@ -1,8 +1,105 @@
-@import url(header.css);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('./header.css');
+@import url('./tabela.css');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+body {
+  background: #f5f8ff;
+  color: #1f1f1f;
+}
+
+.grid-principal {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Cards gerais */
+.card {
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Cores dos cards */
+.card-blue {
+  background: #3d6ef7;
+}
+
+.card-green {
+  background: #1bc45a;
+}
+
+.card-purple {
+  background: linear-gradient(90deg, #a145f7, #c155ff);
+}
+
+/* Botão primário */
+.btn-primary {
+  background: #3d6ef7;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Estilo geral da tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+}
+
+th {
+  background: #0f182b;
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f4f6ff;
+}
+
+td {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.actions img {
+  width: 22px;
+  height: 22px;
 }
