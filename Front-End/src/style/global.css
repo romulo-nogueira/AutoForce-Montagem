@@ -1,105 +1,187 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('./header.css');
-@import url('./tabela.css');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background: #f5f8ff;
-  color: #1f1f1f;
+  background: #f2f6fb;
+  color: #1b1c1e;
 }
 
-.grid-principal {
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* Cards gerais */
-.card {
-  border-radius: 12px;
-  padding: 1.2rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  color: #fff;
-  font-weight: 600;
-}
-
-/* Cores dos cards */
-.card-blue {
-  background: #3d6ef7;
-}
-
-.card-green {
-  background: #1bc45a;
-}
-
-.card-purple {
-  background: linear-gradient(90deg, #a145f7, #c155ff);
-}
-
-/* Botão primário */
-.btn-primary {
-  background: #3d6ef7;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.3s;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-/* Estilo geral da tabela */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 1rem 1.2rem;
-  text-align: left;
-}
-
-th {
-  background: #0f182b;
-  color: #fff;
-  font-weight: 600;
-}
-
-tr:nth-child(even) {
-  background: #f4f6ff;
-}
-
-td {
-  color: #333;
-  font-size: 0.95rem;
-}
-
-.actions {
+.topbar {
+  background: linear-gradient(90deg, #0d1a8c, #063075);
+  color: white;
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 15px 30px;
+  align-items: center;
 }
 
-.actions button {
+.topbar .left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.topbar .logo {
+  background: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0d1a8c;
+  font-size: 24px;
+}
+
+.nav {
+  display: flex;
+  background: white;
+  padding: 10px 40px;
+  gap: 20px;
+  border-bottom: 1px solid #dfe3ea;
+}
+
+.tab {
   background: none;
   border: none;
+  padding: 12px 20px;
   cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
 }
 
-.actions img {
-  width: 22px;
-  height: 22px;
+.tab.active {
+  background: #e7ecff;
+  color: #0033cc;
+  font-weight: bold;
+}
+
+.content {
+  display: none;
+  padding: 30px 40px;
+}
+
+.content.active {
+  display: block;
+}
+
+.cards {
+  display: flex;
+  gap: 25px;
+  margin: 25px 0;
+}
+
+.card {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card .number {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.blue { border-left: 6px solid #4a76ff; }
+.green { border-left: 6px solid #4caf50; }
+.purple { border-left: 6px solid #b620e0; }
+.yellow { border-left: 6px solid #e0c630; }
+
+.tabela {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.tabela th, .tabela td {
+  padding: 15px;
+  border-bottom: 1px solid #e2e7ee;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
+  margin-right: 5px;
+}
+
+.orange { background: #ffe0c2; }
+.blue { background: #cfe1ff; }
+.green { background: #d2ffd7; }
+.yellow { background: #fff3c4; }
+.red { background: #ffd0d0; }
+.purple { background: #ead5ff; }
+
+.edit, .delete {
+  padding: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.delete { color: red; }
+
+.tabela-escala {
+  margin-top: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.escala-header, .linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.escala-header {
+  background: #0a0f28;
+  color: white;
+  padding: 18px;
+  font-weight: bold;
+}
+
+.linha {
+  padding: 18px;
+  border-bottom: 1px solid #e3e6ed;
+}
+
+.dia {
+  font-weight: bold;
+}
+
+.slot {
+  padding: 10px;
+}
+
+.card-op {
+  background: #4a76ff;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.slot.empty {
+  text-align: center;
+  color: #4a76ff;
+  background: #e6edff;
+  border-radius: 10px;
+  font-size: 22px;
+  cursor: pointer;
 }
