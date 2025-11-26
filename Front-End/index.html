@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoForce Montagem</title>
-    <link rel="stylesheet" href="src/style/global.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoForce Montagem</title>
+        <link rel="stylesheet" href="src/style/style.css">
+        <script type="module" src="./src/js/main.js"></script>
 </head>
 <body>
 
@@ -16,6 +17,7 @@
             <span>Sistema de Gestão de Alocação de Operadores</span>
         </div>
     </div>
+    <button id="toggle-theme" onclick="toggleTheme()">🌙</button>
 
     <div class="right">
         <div>Linha de Montagem</div>
@@ -29,13 +31,15 @@
 </nav>
 
 
-<!-- ========================= TELA COLABORADORES ========================= -->
 <section id="colaboradores" class="content active">
 
     <h2>Gestão de Colaboradores</h2>
     <p>Gerencie os operadores e suas qualificações técnicas.</p>
 
     <div id="cards-colaboradores" class="cards"></div>
+    
+    <button class="btn-add" onclick="abrirModalAdicionar()">➕ Novo Operador</button>
+
 
     <table class="tabela">
         <thead>
@@ -53,20 +57,89 @@
 </section>
 
 
-<!-- ========================= TELA ESCALA SEMANAL ========================= -->
 <section id="escala" class="content">
 
     <h2>Escala Semanal de Turnos</h2>
     <p>Gerencie a alocação de operadores em turnos por dia da semana.</p>
 
-    <div id="cards-escala" class="cards"></div>
+    <div id="cards-escala" class="cards">
+        <div id="card-total-alocacoes" data-icon="⏱️"><strong>0</strong><h3>Total Alocações</h3></div>
+        <div id="card-turno-1" data-icon="🟢"><strong>0</strong><h3>Turno 1</h3><span>(06:00-14:00)</span></div>
+        <div id="card-turno-2" data-icon="🟡"><strong>0</strong><h3>Turno 2</h3><span>(14:00-22:00)</span></div>
+        <div id="card-turno-3" data-icon="🟣"><strong>0</strong><h3>Turno 3</h3><span>(22:00-06:00)</span></div>
+    </div>
 
     <div id="tabela-escala" class="escala-wrapper"></div>
 
 </section>
 
 
-<script src="/Back-End/dat"></script>
-<script src="/Back-End/script.js"></script>
+<div id="modal-add" class="modal">
+    <div class="modal-content">
+        <h3>Novo Operador</h3>
+
+        <label>Nome</label>
+        <input id="add-nome" type="text">
+
+        <label>Qualificações (separadas por vírgula)</label>
+        <input id="add-qual" type="text">
+
+        <label>Turno Preferencial</label>
+        <select id="add-turno">
+            <option value="1">Turno 1 (06:00-14:00)</option>
+            <option value="2">Turno 2 (14:00-22:00)</option>
+            <option value="3">Turno 3 (22:00-06:00)</option>
+        </select>
+
+        <div class="actions">
+            <button onclick="salvarNovoOperador()">Salvar</button>
+            <button class="close" onclick="fecharModais()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-edit" class="modal">
+    <div class="modal-content">
+        <h3>Editar Operador</h3>
+
+        <label>Nome</label>
+        <input id="edit-nome" type="text">
+
+        <label>Qualificações</label>
+        <input id="edit-qual" type="text">
+
+        <label>Turno Preferencial</label>
+        <select id="edit-turno">
+            <option value="1">Turno 1 (06:00-14:00)</option>
+            <option value="2">Turno 2 (14:00-22:00)</option>
+            <option value="3">Turno 3 (22:00-06:00)</option>
+        </select>
+
+        <div class="actions">
+            <button onclick="salvarEdicao()">Salvar</button>
+            <button class="close" onclick="fecharModais()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-alocar" class="modal">
+    <div class="modal-content">
+
+        <h3>Alocar Operador</h3>
+        <p>Dia: <strong id="alocar-dia"></strong>, Turno: <strong id="alocar-turno-info"></strong></p>
+
+        <label>Selecione o operador</label>
+        <select id="select-operador"></select>
+
+        <div class="actions">
+            <button onclick="salvarAlocacao()">Alocar</button>
+            <button class="close" onclick="fecharModais()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="./src/js/main.js"></script>
+
 </body>
 </html>

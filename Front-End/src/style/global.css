@@ -1,187 +1,602 @@
+/* ======================================================= */
+/* 1. VARIÁVEIS DE TEMA E PALETA (MODERNA)                 */
+/* ======================================================= */
+
+:root {
+  /* Paleta Profissional e Moderna */
+  --color-main: #007bff;      /* Azul Principal (Destaque/Interação) */
+  --color-accent: #6f42c1;    /* Roxo (Ênfase) */
+  --color-success: #28a745;   /* Verde (Sucesso) */
+  --color-danger: #dc3545;    /* Vermelho (Erro/Excluir) */
+  --color-warning: #ffc107;   /* Amarelo (Atenção) */
+  
+  /* Variáveis do Tema Claro (Padrão) */
+  --background-color: #f0f2f5;   /* Fundo cinza claro suave */
+  --surface-color: #ffffff;      /* Fundo de painéis/tabelas */
+  --text-color: #333333;
+  --text-muted: #667085;
+  --border-color: #e0e0e0;
+  --header-background: linear-gradient(90deg, #1e3c72, #2a5298); /* Degradê Topo */
+  --header-text: #ffffff;
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Variáveis do Tema Escuro */
+body.dark-mode {
+  --background-color: #1a1a2e; /* Azul Escuro Fundo */
+  --surface-color: #2c2c45;    /* Superfície Escura */
+  --text-color: #e0e0e0;
+  --text-muted: #a0a0b0;
+  --border-color: #3c3c5c;
+  --header-background: linear-gradient(90deg, #102a43, #1e3c72); 
+  --header-text: #ffffff;
+  --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ======================================================= */
+/* 2. RESET BÁSICO E ESTILOS GLOBAIS                        */
+/* ======================================================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background: #f2f6fb;
-  color: #1b1c1e;
+  font-family: 'Inter', sans-serif, 'Segoe UI';
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
 }
 
+h1, h2, h3 {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+
+/* ======================================================= */
+/* 3. CABEÇALHO (TOPBAR) E TEMA                            */
+/* ======================================================= */
+
 .topbar {
-  background: linear-gradient(90deg, #0d1a8c, #063075);
-  color: white;
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
   align-items: center;
+  padding: 1rem 2rem;
+  background: var(--header-background); 
+  color: var(--header-text);
+  box-shadow: var(--shadow-light);
 }
 
 .topbar .left {
   display: flex;
-  gap: 15px;
   align-items: center;
 }
 
 .topbar .logo {
-  background: white;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0d1a8c;
-  font-size: 24px;
+  font-size: 2rem;
+  margin-right: 1rem;
 }
+
+.topbar .title h1 {
+  font-size: 1.35rem;
+  color: var(--header-text);
+  margin: 0;
+}
+
+.topbar .title span {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  font-weight: 300;
+  display: block;
+}
+
+.topbar .right {
+  text-align: right;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-left: auto;
+  padding-right: 1rem;
+}
+
+.topbar .right strong {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Botão de Tema */
+#toggle-theme {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--header-text);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#toggle-theme:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+
+/* ======================================================= */
+/* 4. NAVEGAÇÃO (TABS) E CONTEÚDO                            */
+/* ======================================================= */
 
 .nav {
   display: flex;
-  background: white;
-  padding: 10px 40px;
-  gap: 20px;
-  border-bottom: 1px solid #dfe3ea;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
 }
 
 .tab {
-  background: none;
+  padding: 1rem 1.5rem;
   border: none;
-  padding: 12px 20px;
+  background: none;
   cursor: pointer;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s, border-bottom 0.3s, background-color 0.3s;
+  font-weight: 500;
+}
+
+.tab:hover {
+  color: var(--color-main);
+  background-color: var(--background-color);
 }
 
 .tab.active {
-  background: #e7ecff;
-  color: #0033cc;
-  font-weight: bold;
+  color: var(--color-main);
+  border-bottom-color: var(--color-main);
+  font-weight: 600;
+  background-color: var(--background-color);
 }
 
 .content {
   display: none;
-  padding: 30px 40px;
+  padding: 1.5rem 2rem;
 }
 
 .content.active {
   display: block;
 }
 
+
+/* ======================================================= */
+/* 5. CARDS GERAIS (Estatísticas de Colaboradores)         */
+/* ======================================================= */
+
 .cards {
   display: flex;
-  gap: 25px;
-  margin: 25px 0;
+  flex-wrap: wrap; /* Garante responsividade básica */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.card {
+.cards > div {
   flex: 1;
-  background: white;
-  padding: 25px;
+  min-width: 250px; /* Mínimo para telas menores */
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  color: white;
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+  transition: transform 0.2s;
 }
 
-.card h3 {
-  margin-bottom: 10px;
+.cards > div:hover {
+  transform: translateY(-3px);
 }
 
-.card .number {
-  font-size: 26px;
-  font-weight: bold;
+.cards > div strong {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
-.blue { border-left: 6px solid #4a76ff; }
-.green { border-left: 6px solid #4caf50; }
-.purple { border-left: 6px solid #b620e0; }
-.yellow { border-left: 6px solid #e0c630; }
+.cards > div h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  opacity: 0.9;
+}
+
+/* Cores específicas dos cards de Colaboradores */
+#cards-colaboradores > div:nth-child(1) { 
+  background: linear-gradient(45deg, #2a5298, #007bff); 
+}
+#cards-colaboradores > div:nth-child(2) { 
+  background: linear-gradient(45deg, #2ecc71, #28a745); 
+}
+#cards-colaboradores > div:nth-child(3) { 
+  background: linear-gradient(45deg, #8e44ad, #6f42c1); 
+}
+
+
+/* ======================================================= */
+/* 6. TABELAS (Geral) e Botões                              */
+/* ======================================================= */
 
 .tabela {
   width: 100%;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.tabela th, .tabela td {
-  padding: 15px;
-  border-bottom: 1px solid #e2e7ee;
-}
-
-.tag {
-  padding: 4px 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--surface-color);
   border-radius: 8px;
-  font-size: 13px;
-  color: #333;
-  margin-right: 5px;
-}
-
-.orange { background: #ffe0c2; }
-.blue { background: #cfe1ff; }
-.green { background: #d2ffd7; }
-.yellow { background: #fff3c4; }
-.red { background: #ffd0d0; }
-.purple { background: #ead5ff; }
-
-.edit, .delete {
-  padding: 8px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.delete { color: red; }
-
-.tabela-escala {
-  margin-top: 30px;
-  background: white;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-light);
 }
 
-.escala-header, .linha {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.tabela thead tr {
+  background-color: var(--background-color); 
+  color: var(--text-muted);
+  text-align: left;
+  border-bottom: 2px solid var(--border-color);
 }
 
-.escala-header {
-  background: #0a0f28;
-  color: white;
-  padding: 18px;
-  font-weight: bold;
+.tabela th {
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 
-.linha {
-  padding: 18px;
-  border-bottom: 1px solid #e3e6ed;
+.tabela td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
 }
 
-.dia {
-  font-weight: bold;
+.tabela tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
 }
 
-.slot {
-  padding: 10px;
+.tabela tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.card-op {
-  background: #4a76ff;
-  color: white;
-  padding: 12px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.slot.empty {
-  text-align: center;
-  color: #4a76ff;
-  background: #e6edff;
-  border-radius: 10px;
-  font-size: 22px;
+/* Estilo das ações */
+.tabela td button {
+  background: none;
+  border: none;
   cursor: pointer;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.tabela td button:active {
+  transform: scale(0.95);
+}
+
+.btn-add {
+  background-color: var(--color-main);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.btn-add:hover {
+  background-color: #0056b3;
+}
+
+
+/* ======================================================= */
+/* 7. ESTILO DAS TAGS DE QUALIFICAÇÃO                      */
+/* ======================================================= */
+
+.tabela td:nth-child(3) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.tabela td span[class$="-tag"] { 
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px; 
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Paleta de Cores de Tags */
+.tag-montagem, .tag-qualidade, .tag-eletrica {
+  background-color: #007bff15; 
+  color: var(--color-main);
+}
+.tag-inspecao, .tag-controle {
+  background-color: #28a74515; 
+  color: var(--color-success);
+}
+.tag-solda, .tag-robotica {
+  background-color: #ffc10715; 
+  color: var(--color-warning);
+}
+.tag-pintura, .tag-geral {
+  background-color: #6f42c115; 
+  color: var(--color-accent);
+}
+.tag-teste {
+  background-color: #dc354515;
+  color: var(--color-danger);
+}
+
+
+/* ======================================================= */
+/* 8. MODAIS                                               */
+/* ======================================================= */
+
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); 
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-content {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+  color: var(--color-main);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.modal-content input[type="text"],
+.modal-content select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.modal-content .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.modal-content .actions button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.modal-content .actions button:not(.close) {
+  background-color: var(--color-main);
+  color: white;
+}
+
+.modal-content .actions button.close {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.modal-content .actions button:not(.close):hover {
+  background-color: #0056b3;
+}
+
+.modal-content .actions button.close:hover {
+  background-color: #adb5bd;
+}
+
+
+/* ======================================================= */
+/* 9. ESTILO DA ESCALA SEMANAL (Cards e Tabela)            */
+/* ======================================================= */
+
+/* Cards de Estatísticas na Escala */
+#escala .cards {
+  margin-bottom: 2rem;
+}
+
+/* Estilo para os cards de Turno 1, 2 e 3 */
+#escala .cards > div {
+  background: var(--surface-color); 
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+  min-height: 80px;
+  padding: 1rem;
+  text-align: left;
+}
+
+#escala .cards > div:hover {
+  transform: none; 
+}
+
+#escala .cards > div strong {
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+#escala .cards > div h3 {
+   font-size: 0.9rem;
+   color: var(--text-muted);
+}
+#escala .cards > div[data-icon]:after {
+  display: none;
+}
+
+/* Indicadores de Cor na Borda (simulando os painéis da foto) */
+#card-total-alocacoes { border-left: 5px solid var(--color-main); } 
+#card-turno-1 { border-left: 5px solid #ffc107; } /* Amarelo */
+#card-turno-2 { border-left: 5px solid #28a745; } /* Verde */
+#card-turno-3 { border-left: 5px solid #6f42c1; } /* Roxo */
+
+
+/* Estrutura de Escala Semanal (Tabela) */
+.escala-wrapper {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+}
+
+.tabela-escala-turnos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Corrigido o cabeçalho para ser mais escuro e uniforme como na imagem */
+.tabela-escala-turnos th {
+  background-color: #1a2a47; /* Azul Escuro (Corrigido para a foto) */
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+/* Alinhamento dos sub-títulos dos turnos */
+.tabela-escala-turnos th span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.tabela-escala-turnos td {
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  vertical-align: top;
+}
+
+/* Coluna Dia/Turno */
+.tabela-escala-turnos td:first-child {
+  font-weight: 600;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem 0.5rem;
+  width: 15%; 
+  text-align: left;
+}
+
+.slot-container {
+  padding: 5px;
+  min-height: 120px;
+}
+
+/* Estilo do Card de Operador Alocado (Bloco Azul da Captura 89) */
+.operador-slot-card {
+  background-color: var(--color-main); 
+  color: white;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.operador-slot-card strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+.operador-slot-card span {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.operador-slot-card .qualificacoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  margin-top: 0.3rem;
+}
+
+.operador-slot-card .qualificacoes span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  display: inline-block;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.slot-adicionar {
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: 5px;
+  color: var(--color-main); 
+  border: 1px dashed var(--color-main);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.slot-adicionar:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.slot-vago {
+  color: var(--text-muted);
+  font-style: italic;
+  opacity: 0.7;
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
 }
