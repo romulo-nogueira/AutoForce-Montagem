@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.1.7:3000";
+const API_URL = "https://autoforce-montagem.onrender.com";
 
 //  FUNCIONÁRIOS 
 export async function apiListarFuncionarios() {
