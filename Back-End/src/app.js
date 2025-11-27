@@ -6,26 +6,34 @@ import conectaBanco from "./config/dbConnect.js";
 
 const app = express();
 
-app.use(cors());
+// Configurar CORS
+// Para produção, troque "*" pelo domínio do seu frontend, ex: "https://meu-frontend.vercel.app"
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+}));
+
+// Habilitar JSON no body das requisições
 app.use(express.json());
 
-routes(app);  // rotas ativadas
+// Ativar rotas
+routes(app);
 
-// Conectar ao banco e só então subir servidor
+// Função para iniciar o servidor após conectar ao banco
 async function startServer() {
   try {
     await conectaBanco();
-    console.log("📦 Banco conectado!");
+    console.log("📦 Banco conectado com sucesso!");
 
-    const porta = process.env.PORTA;
-    const end = process.env.END;
+    // Render fornece a porta via process.env.PORT
+    const PORT = process.env.PORT || 3000;
 
-    app.listen(porta, () =>
-      console.log(`🚀 Servidor rodando em: ${end}:${porta}`)
+    app.listen(PORT, () =>
+      console.log(`🚀 Servidor rodando em: ${PORT}`)
     );
 
   } catch (err) {
-    console.error("Erro ao iniciar servidor:", err);
+    console.error("❌ Erro ao iniciar servidor:", err);
   }
 }
 
