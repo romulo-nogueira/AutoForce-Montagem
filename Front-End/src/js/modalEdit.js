@@ -1,60 +1,72 @@
-// src/js/modalEdit.js
 import { obterOperadorPorId, carregarOperadores } from "./operadores.js";
 import { fecharModais } from "./utils.js";
+import { apiAtualizarFuncionario } from "./API.js";
 
-let operadorEmEdicao = null;
+let operadorEmEdicaoId = null;
 
 // ====================== MODAL EDITAR ======================
-
-/**
- * Abre o modal de edição e preenche os campos com os dados do operador.
- * @param {string} id O ID do operador a ser editado.
- */
 export function abrirModalEditar(id) {
-    const operador = obterOperadorPorId(id);
-    if (!operador) {
-        alert("Operador não encontrado para edição.");
-        return;
-    }
+  const operador = obterOperadorPorId(id);
+  if (!operador) {
+    alert("Operador não encontrado para edição.");
+    return;
+  }
 
-    operadorEmEdicao = operador;
+  operadorEmEdicaoId = id;
 
-    // Preenche os campos do modal com os dados atuais
-    document.getElementById("edit-nome").value = operador.nome;
-    document.getElementById("edit-qual").value = operador.qualificacoes.join(', ');
-    document.getElementById("edit-turno").value = operador.turnoPreferencial.toString();
-    
-    document.getElementById("modal-edit").style.display = "flex";
+  // Preenche os campos do modal com os dados atuais
+  document.getElementById("edit-nome").value = operador.nome || "";
+  document.getElementById("edit-qual").value = (operador.qualificacoes || []).join(", ");
+  document.getElementById("edit-turno").value = operador.turnoPreferencial
+    ? operador.turnoPreferencial.toString()
+    : "1";
+
+  document.getElementById("modal-edit").style.display = "flex";
 }
 
 /**
  * Salva as alterações feitas no modal de edição.
  */
-export function salvarEdicao() {
-    if (!operadorEmEdicao) return;
+export async function salvarEdicao() {
+  if (!operadorEmEdicaoId) return;
 
-    const nome = document.getElementById("edit-nome").value.trim();
-    const qualificacoesString = document.getElementById("edit-qual").value.trim();
-    const turno = Number(document.getElementById("edit-turno").value);
+  const nome = document.getElementById("edit-nome").value.trim();
+  const qualificacoesString = document.getElementById("edit-qual").value.trim();
+  const turno = Number(document.getElementById("edit-turno").value);
 
-    if (!nome) {
-        alert("O campo Nome é obrigatório.");
-        return;
+  if (!nome) {
+    alert("O campo Nome é obrigatório.");
+    return;
+  }
+
+  const qualificacoes = qualificacoesString
+    ? qualificacoesString.split(",").map(q => q.trim()).filter(q => q.length > 0)
+    : [];
+
+  const payload = {
+    nome,
+    qualificacoes,
+    turnoPreferencial: turno
+  };
+
+  try {
+    const resp = await apiAtualizarFuncionario(operadorEmEdicaoId, payload);
+
+    // Se a API retorna um objeto com erro
+    if (resp?.erro || resp?.error || resp?.message) {
+      const msg = resp.erro || resp.error || resp.message;
+      alert(msg);
+      return;
     }
-    
-    // Processa a string de qualificações
-    const qualificacoes = qualificacoesString
-        .split(',')
-        .map(q => q.trim())
-        .filter(q => q.length > 0);
 
-    // Atualiza o objeto do operador em memória
-    operadorEmEdicao.nome = nome;
-    operadorEmEdicao.qualificacoes = qualificacoes;
-    operadorEmEdicao.turnoPreferencial = turno;
+    // Recarrega do backend para garantir consistência
+    await carregarOperadores();
 
-    // Recarrega a tabela e limpa o estado
-    carregarOperadores(); 
-    operadorEmEdicao = null;
+    // limpa e fecha
+    operadorEmEdicaoId = null;
     fecharModais();
+  } catch (err) {
+    console.error("Erro ao atualizar funcionário:", err);
+    alert("Erro ao atualizar funcionário. Veja console para detalhes.");
+  }
 }
