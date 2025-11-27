@@ -1,73 +1,91 @@
-// src/js/operadores.js
-import { fecharModais } from "./utils.js"; 
-// Não precisa importar Modais, pois as chamadas são feitas via window (global)
+import { 
+    apiListarFuncionarios,
+    apiCriarFuncionario,
+    apiAtualizarFuncionario,
+    apiDeletarFuncionario
+} from "./API.js";
 
-// ====================== DADOS E CRUD BÁSICO ======================
+import { fecharModais } from "./utils.js";
 
-// Lista de operadores em memória (simulando um banco de dados)
-export let operadores = [
-    { id: "OP-001", nome: "João Silva", qualificacoes: ["Solda Robótica", "Montagem"], turnoPreferencial: 1 },
-    { id: "OP-002", nome: "Maria Santos", qualificacoes: ["Inspeção Elétrica", "Controle de Qualidade"], turnoPreferencial: 2 },
-];
+// Salva os operdores no BD
+export let operadores = [];
 
-/**
- * Carrega e renderiza a lista de operadores na tabela.
- */
-export function carregarOperadores() {
-    const tabela = document.getElementById("tabela-colaboradores"); 
-    if (!tabela) return;
 
-    tabela.innerHTML = "";
+export async function carregarOperadores() {
+    try {
+        operadores = await apiListarFuncionarios();
 
-    operadores.forEach(op => {
-        const linha = document.createElement("tr");
-        
-        // As funções de ação são chamadas usando os módulos exportados para o window no main.js
-        linha.innerHTML = `
-            <td>${op.id}</td>
-            <td>${op.nome}</td>
-            <td>${op.qualificacoes.join(", ")}</td>
-            <td>Turno ${op.turnoPreferencial}</td>
-            <td>
-                <button class="btn-edit" onclick="ModalEdit.abrirModalEditar('${op.id}')">Editar</button>
-                <button class="btn-delete" onclick="Operadores.deletarOperador('${op.id}')">Excluir</button>
-                <button class="btn-alocar" onclick="ModalAlocar.abrirModalAlocar('${op.id}')">Alocar</button>
-            </td>
-        `;
-        tabela.appendChild(linha);
-    });
-}
+        const tabela = document.getElementById("tabela-colaboradores");
+        if (!tabela) return;
 
-/**
- * Adiciona um novo operador e recarrega a tabela.
- * @param {Object} novo O objeto do novo operador.
- */
-export function adicionarOperador(novo) {
-    operadores.push(novo);
-    carregarOperadores();
-}
+        tabela.innerHTML = "";
 
-/**
- * Encontra e retorna um operador pelo ID.
- * @param {string} id O ID do operador.
- * @returns {Object|undefined} O objeto do operador ou undefined.
- */
-export function obterOperadorPorId(id) {
-    return operadores.find(o => o.id === id);
-}
+        operadores.forEach(op => {
+            const linha = document.createElement("tr");
 
-/**
- * Remove um operador e recarrega a tabela.
- * @param {string} id O ID do operador a ser removido.
- */
-export function deletarOperador(id) {
-    const confirmacao = confirm(`Tem certeza que deseja excluir o operador ${id}?`);
-    if (confirmacao) {
-        const index = operadores.findIndex(op => op.id === id);
-        if (index > -1) {
-            operadores.splice(index, 1);
-            carregarOperadores();
-            console.log(`Operador ${id} removido.`);
-        }
+            linha.innerHTML = `
+                <td>${op.matricula}</td>
+                <td>${op.nome}</td>
+                <td>${op.qualificacoes.map(q => `<span class="tag">${q}</span>`).join("")}</td>
+                <td>Turno ${op.turnoPreferencial}</td>
+                <td>
+                    <button class="btn-edit" onclick="ModalEdit.abrirModalEditar('${op._id}')">Editar</button>
+                    <button class="btn-delete" onclick="Operadores.deletarOperador('${op._id}')">Excluir</button>
+                    
+                </td>
+            `;
+
+            tabela.appendChild(linha);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar funcionários:", error);
+        alert("Erro ao carregar funcionários.");
     }
-} 
+}
+
+//Cria operador
+export async function adicionarOperador(novo) {
+    try {
+        await apiCriarFuncionario(novo);
+        await carregarOperadores();
+        fecharModais();
+    } catch (error) {
+        console.error("Erro ao criar funcionário:", error);
+        alert("Erro ao criar funcionário.");
+    }
+}
+
+////Atualiza Funcionadio
+export async function atualizarOperador(id, data) {
+    try {
+        await apiAtualizarFuncionario(id, data);
+        await carregarOperadores();
+        fecharModais();
+    } catch (error) {
+        console.error("Erro ao atualizar funcionário:", error);
+        alert("Erro ao atualizar funcionário.");
+    }
+}
+
+//Deleta operador
+
+export async function deletarOperador(id) {
+    const confirmar = confirm(`Deseja excluir o funcionário ${id}?`);
+    if (!confirmar) return;
+
+    try {
+        await apiDeletarFuncionario(id);
+        await carregarOperadores();
+    } catch (error) {
+        console.error("Erro ao deletar funcionário:", error);
+        alert("Erro ao deletar funcionário.");
+    }
+}
+
+
+ //Lista de Funcionarios
+ 
+export function obterOperadorPorId(id) {
+    return operadores.find(op => op._id === id);
+}
