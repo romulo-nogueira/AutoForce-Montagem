@@ -19,15 +19,10 @@ let escala = {
 
 // ======================= HELPERS =======================
 function gerarNovoId() {
-  // busca maior número já existente e incrementa
   const nums = operadores
-    .map(o => {
-      const m = o.id.match(/OP-(\d+)/);
-      return m ? Number(m[1]) : 0;
-    })
+    .map(o => Number(o.id.replace("OP-", "")))
     .sort((a,b) => b - a);
-  const prox = (nums[0] || 0) + 1;
-  return "OP-" + String(prox).padStart(3, "0");
+  return "OP-" + String(nums[0] + 1).padStart(3, "0");
 }
 
 // ======================= NAVEGAÇÃO =======================
@@ -50,8 +45,11 @@ function renderColaboradores() {
   const cards = document.getElementById("cards-colaboradores");
 
   tbody.innerHTML = "";
+
   const qualificacoesUnicas = new Set(operadores.flatMap(op => op.qualificacoes));
-  const mediaQual = operadores.length === 0 ? 0 : (operadores.reduce((acc, op) => acc + op.qualificacoes.length, 0) / operadores.length);
+  const mediaQual = operadores.length 
+    ? operadores.reduce((acc,op)=>acc+op.qualificacoes.length,0)/operadores.length 
+    : 0;
 
   cards.innerHTML = `
       <div class="card blue"><h3>Total de Operadores</h3><span class="number">${operadores.length}</span></div>
@@ -60,18 +58,18 @@ function renderColaboradores() {
   `;
 
   operadores.forEach(op => {
-      tbody.innerHTML += `
-          <tr>
-              <td>${op.id}</td>
-              <td>${op.nome}</td>
-              <td>${op.qualificacoes.map(q => `<span class="tag">${q}</span>`).join("")}</td>
-              <td>Turno ${op.turnoPreferencial}</td>
-              <td>
-                  <button class="edit" onclick="abrirModalEditar('${op.id}')">✏️</button>
-                  <button class="delete" onclick="removerOperador('${op.id}')">🗑️</button>
-              </td>
-          </tr>
-      `;
+    tbody.innerHTML += `
+      <tr>
+        <td>${op.id}</td>
+        <td>${op.nome}</td>
+        <td>${op.qualificacoes.map(q => `<span class="tag">${q}</span>`).join("")}</td>
+        <td>Turno ${op.turnoPreferencial}</td>
+        <td>
+            <button class="edit" onclick="abrirModalEditar('${op.id}')">✏️</button>
+            <button class="delete" onclick="removerOperador('${op.id}')">🗑️</button>
+        </td>
+      </tr>
+    `;
   });
 }
 
@@ -80,86 +78,71 @@ function renderEscala() {
   const container = document.getElementById("tabela-escala");
   const cards = document.getElementById("cards-escala");
 
-  let turno1 = 0, turno2 = 0, turno3 = 0;
+  let t1 = 0, t2 = 0, t3 = 0;
 
   Object.values(escala).forEach(dia => {
-      turno1 += dia[1].length;
-      turno2 += dia[2].length;
-      turno3 += dia[3].length;
+    t1 += dia[1].length;
+    t2 += dia[2].length;
+    t3 += dia[3].length;
   });
 
   cards.innerHTML = `
-      <div class="card blue"><h3>Total Alocações</h3><span class="number">${turno1 + turno2 + turno3}</span></div>
-      <div class="card green"><h3>Turno 1</h3><span class="number">${turno1}</span></div>
-      <div class="card yellow"><h3>Turno 2</h3><span class="number">${turno2}</span></div>
-      <div class="card purple"><h3>Turno 3</h3><span class="number">${turno3}</span></div>
+    <div class="card blue"><h3>Total Alocações</h3><span class="number">${t1+t2+t3}</span></div>
+    <div class="card green"><h3>Turno 1</h3><span class="number">${t1}</span></div>
+    <div class="card yellow"><h3>Turno 2</h3><span class="number">${t2}</span></div>
+    <div class="card purple"><h3>Turno 3</h3><span class="number">${t3}</span></div>
   `;
 
   container.innerHTML = `
-      <div class="escala-header">
-          <div>Dia</div>
-          <div>Turno 1<br><small>(06:00–14:00)</small></div>
-          <div>Turno 2<br><small>(14:00–22:00)</small></div>
-          <div>Turno 3<br><small>(22:00–06:00)</small></div>
-      </div>
+    <div class="escala-header">
+        <div>Dia</div>
+        <div>Turno 1<br><small>(06:00–14:00)</small></div>
+        <div>Turno 2<br><small>(14:00–22:00)</small></div>
+        <div>Turno 3<br><small>(22:00–06:00)</small></div>
+    </div>
   `;
 
   diasSemana.forEach(dia => {
-      container.innerHTML += `
-          <div class="linha">
-              <div class="dia">${dia}</div>
+    container.innerHTML += `
+      <div class="linha">
+        <div class="dia">${dia}</div>
 
-              ${[1, 2, 3].map(turno => `
-                  <div class="slot">
-                      ${
-                          escala[dia][turno].length === 0
-                          ? `<button class="add-btn" onclick="abrirModalAlocar('${dia}', ${turno})">+ Alocar</button>`
-                          : escala[dia][turno].map(id => {
-                              const op = operadores.find(o => o.id === id) || { nome: id };
-                              return `<div class="card-op" onclick="removerDaEscala('${dia}', ${turno}, '${id}')">${op.nome}</div>`;
-                          }).join("")
-                      }
-                  </div>
-              `).join("")}
+        ${[1,2,3].map(turno => `
+          <div class="slot">
+            ${
+              escala[dia][turno].length === 0
+              ? `<button class="add-btn" onclick="abrirModalAlocar('${dia}', ${turno})">+ Alocar</button>`
+              : escala[dia][turno].map(id => {
+                    const op = operadores.find(o => o.id === id);
+                    return `<div class="card-op" onclick="removerDaEscala('${dia}', ${turno}, '${id}')">${op?.nome ?? id}</div>`;
+                }).join("")
+            }
           </div>
-      `;
+        `).join("")}
+
+      </div>
+    `;
   });
+
 }
 
-// ======================= MODAL: ADICIONAR OPERADOR =======================
+// ======================= MODAL: ADICIONAR =======================
 function abrirModalAdicionar() {
-  const modal = document.getElementById("modal-add");
-  if (!modal) return;
-  modal.classList.add("open");
-
-  document.getElementById("add-nome").value = "";
-  document.getElementById("add-qual").value = "";
-  document.getElementById("add-turno").value = "1";
+  document.getElementById("modal-add").classList.add("open");
 }
 
 function salvarNovoOperador() {
-  const inputNome = document.getElementById("add-nome");
-  const inputQual = document.getElementById("add-qual");
-  const inputTurno = document.getElementById("add-turno");
+  const nome = document.getElementById("add-nome").value.trim();
+  const qualStr = document.getElementById("add-qual").value.trim();
+  const turno = Number(document.getElementById("add-turno").value);
 
-  if (!inputNome || !inputQual || !inputTurno) return alert("Elementos do modal ausentes.");
-
-  const nome = inputNome.value.trim();
-  const qualStr = inputQual.value.trim();
-  const turno = Number(inputTurno.value);
-
-  if (nome === "" || qualStr === "") {
-      alert("Preencha todos os campos.");
-      return;
-  }
-
-  const qualificacoes = qualStr.split(",").map(q => q.trim()).filter(q => q.length > 0);
+  if (!nome || !qualStr) return alert("Preencha todos os campos.");
 
   const novo = {
-      id: gerarNovoId(),
-      nome,
-      qualificacoes,
-      turnoPreferencial: turno
+    id: gerarNovoId(),
+    nome,
+    qualificacoes: qualStr.split(",").map(q=>q.trim()),
+    turnoPreferencial: turno
   };
 
   operadores.push(novo);
@@ -169,45 +152,37 @@ function salvarNovoOperador() {
   renderEscala();
 }
 
-// ======================= MODAL: EDITAR OPERADOR (CORRIGIDO) =======================
+// ======================= MODAL: EDITAR =======================
 let operadorEditando = null;
 
 function abrirModalEditar(id) {
   operadorEditando = operadores.find(o => o.id === id);
-  if (!operadorEditando) return alert("Operador não encontrado.");
-
-  const modal = document.getElementById("modal-edit");
-  if (!modal) return alert("Modal de edição não encontrado no DOM.");
+  if (!operadorEditando) return;
 
   document.getElementById("edit-nome").value = operadorEditando.nome;
   document.getElementById("edit-qual").value = operadorEditando.qualificacoes.join(", ");
   document.getElementById("edit-turno").value = operadorEditando.turnoPreferencial;
 
-  modal.classList.add("open");
+  document.getElementById("modal-edit").classList.add("open");
 }
 
 function salvarEdicao() {
-  if (!operadorEditando) return alert("Nenhum operador carregado para edição.");
-
   const nome = document.getElementById("edit-nome").value.trim();
   const qualStr = document.getElementById("edit-qual").value.trim();
   const turno = Number(document.getElementById("edit-turno").value);
 
-  if (nome === "" || qualStr === "") {
-      alert("Preencha todos os campos.");
-      return;
-  }
+  if (!nome || !qualStr) return alert("Preencha todos os campos.");
 
   operadorEditando.nome = nome;
-  operadorEditando.qualificacoes = qualStr.split(",").map(q => q.trim());
+  operadorEditando.qualificacoes = qualStr.split(",").map(q=>q.trim());
   operadorEditando.turnoPreferencial = turno;
 
   fecharModais();
   renderColaboradores();
-  renderEscala(); // garante atualização dos nomes na grade
+  renderEscala();
 }
 
-// ======================= MODAL: ALOCAR (CORRIGIDO) =======================
+// ======================= MODAL: ALOCAR =======================
 let diaSelecionado = null;
 let turnoSelecionado = null;
 
@@ -215,51 +190,26 @@ function abrirModalAlocar(dia, turno) {
   diaSelecionado = dia;
   turnoSelecionado = turno;
 
-  const select = document.getElementById("select-operador");
-  if (!select) return alert("Elemento select-operador não encontrado.");
+  const sel = document.getElementById("select-operador");
+  sel.innerHTML = "";
 
-  select.innerHTML = "";
-
-  operadores.forEach(op => {
-      // impede operador já alocado em qualquer turno no mesmo dia
-      const jaNoDia = [1,2,3].some(t => escala[dia][t].includes(op.id));
-
-      // permitir exibir apenas quem NÃO está alocado no mesmo dia
-      if (!jaNoDia) {
-          select.innerHTML += `<option value="${op.id}">${op.nome}</option>`;
-      }
+  operadores.forEach(op=>{
+    const jaNoDia = [1,2,3].some(t=>escala[dia][t].includes(op.id));
+    if (!jaNoDia) {
+      sel.innerHTML += `<option value="${op.id}">${op.nome}</option>`;
+    }
   });
 
-  // se não há opções, adicionar um placeholder desabilitado
-  if (select.children.length === 0) {
-      select.innerHTML = `<option value="" disabled selected>-- Nenhum operador disponível --</option>`;
+  if (sel.innerHTML === "") {
+    sel.innerHTML = `<option disabled>-- Nenhum operador disponível --</option>`;
   }
 
   document.getElementById("modal-alocar").classList.add("open");
 }
 
 function salvarAlocacao() {
-  const sel = document.getElementById("select-operador");
-  if (!sel) return alert("Elemento select-operador ausente.");
-
-  const opId = sel.value;
-  if (!opId) {
-      alert("Nenhum operador disponível para este dia.");
-      return;
-  }
-
-  // impede duplicado no mesmo turno
-  if (escala[diaSelecionado][turnoSelecionado].includes(opId)) {
-      alert("Operador já está neste turno.");
-      return;
-  }
-
-  // impede que o operador esteja em outro turno do mesmo dia (defesa extra)
-  const jaNoDia = [1,2,3].some(t => escala[diaSelecionado][t].includes(opId));
-  if (jaNoDia) {
-      alert("Operador já alocado em outro turno deste dia.");
-      return;
-  }
+  const opId = document.getElementById("select-operador").value;
+  if (!opId) return alert("Nenhum operador disponível.");
 
   escala[diaSelecionado][turnoSelecionado].push(opId);
 
@@ -267,31 +217,31 @@ function salvarAlocacao() {
   renderEscala();
 }
 
-// ======================= REMOVER OPERADOR =======================
+// ======================= REMOVER OP =======================
 function removerOperador(id) {
   if (!confirm("Excluir operador?")) return;
 
-  operadores = operadores.filter(o => o.id !== id);
+  operadores = operadores.filter(o=>o.id!==id);
 
-  diasSemana.forEach(dia => {
-      [1,2,3].forEach(turno => {
-          escala[dia][turno] = escala[dia][turno].filter(op => op !== id);
-      });
+  diasSemana.forEach(dia=>{
+    [1,2,3].forEach(turno=>{
+      escala[dia][turno] = escala[dia][turno].filter(op=>op!==id);
+    });
   });
 
   renderColaboradores();
   renderEscala();
 }
 
-// ======================= REMOVER DA ESCALA =======================
 function removerDaEscala(dia, turno, id) {
   escala[dia][turno] = escala[dia][turno].filter(op => op !== id);
   renderEscala();
 }
 
-// ======================= FECHAR MODAIS =======================
+
+// ======================= FECHAR =======================
 function fecharModais() {
-  document.querySelectorAll(".modal").forEach(m => m.classList.remove("open"));
+  document.querySelectorAll(".modal").forEach(m=>m.classList.remove("open"));
 }
 
 // ======================= START =======================
