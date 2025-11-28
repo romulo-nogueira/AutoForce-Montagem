@@ -1,4 +1,4 @@
-// src/js/theme.js
+
 const THEME_KEY = 'autoforceTheme';
 
 // ====================== TEMA (DARK MODE) ======================
