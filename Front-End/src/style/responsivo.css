@@ -1,0 +1,240 @@
+/* ==========================================================
+     RESPONSIVIDADE COMPLETA — MOBILE E TABLET
+     Header, Cards, Tabela, Escala — 100% corrigido
+   ========================================================== */
+
+
+/* =========================================
+      PROTEÇÕES GERAIS
+   ========================================= */
+   html, body, .app {
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+/* =========================================
+      TABLET (ATÉ 980px)
+   ========================================= */
+@media (max-width: 980px) {
+
+    /* Header */
+    .header {
+        padding: 14px 18px;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .header .title {
+        font-size: 1.3rem;
+    }
+
+    .header .subtitle {
+        font-size: .9rem;
+    }
+
+    .theme-toggle {
+        padding: 8px 12px;
+        font-size: 1rem;
+    }
+
+    /* Escala — 4 colunas */
+    .week-grid {
+        grid-template-columns: repeat(4, minmax(160px, 1fr));
+        gap: 14px;
+    }
+}
+
+
+
+/* =========================================
+      MOBILE (ATÉ 640px)
+   ========================================= */
+@media (max-width: 640px) {
+
+    /* --------------------------------------
+       HEADER
+    -------------------------------------- */
+    .logo{
+        display: none;
+    }
+    .right{
+        display: none;
+    }
+    .header {
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .header .title {
+        font-size: 1.15rem;
+    }
+
+    .header .subtitle {
+        font-size: 0.85rem;
+        opacity: 0.7;
+    }
+
+    .theme-toggle {
+        padding: 7px 12px;
+        font-size: 0.9rem;
+        align-self: flex-end;
+    }
+
+
+    /* --------------------------------------
+       COLABORADORES — TABELA EM CARDS
+    -------------------------------------- */
+
+    .table-wrapper {
+        overflow-x: visible;
+        width: 100%;
+    }
+
+    .responsive-table {
+        width: 100%;
+        border: none;
+        display: block;
+    }
+
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    /* Cada linha vira um card */
+    .responsive-table tbody tr {
+        display: block;
+        padding: 14px;
+        margin-bottom: 14px;
+        border-radius: 12px;
+        background: var(--surface-color);
+        border: 1px solid var(--border-color);
+    }
+
+    /* Cada célula vira label + valor */
+    .responsive-table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 7px 0;
+        border: none;
+        white-space: normal;
+    }
+
+    .responsive-table tbody tr td:before {
+        content: attr(data-label) ": ";
+        font-weight: 700;
+        width: 110px;
+        flex-shrink: 0;
+        color: var(--text-muted);
+    }
+
+    .responsive-table tbody tr td.actions {
+        justify-content: flex-start;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+
+
+    /* --------------------------------------
+       ESCALA SEMANAL — RESPONSIVA REAL
+    -------------------------------------- */
+
+    .week-container {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 12px;
+    }
+
+    .week-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(170px, 1fr); /* largura ideal */
+        gap: 14px;
+        min-width: unset;
+    }
+
+    .day {
+        min-width: 170px;
+        background: var(--surface-color);
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    .day-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .slot {
+        font-size: 0.9rem;
+        padding: 4px 0;
+    }
+}
+
+
+
+/* =========================================
+      MOBILE SUPER PEQUENO (ATÉ 420px)
+   ========================================= */
+@media (max-width: 420px) {
+
+    /* Header ainda menor */
+    .header {
+        gap: 2px;
+    }
+
+    .header .title {
+        font-size: 1.05rem;
+    }
+
+    .theme-toggle {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+
+    /* Escala — aumenta legibilidade */
+    .day {
+        min-width: 150px;
+        padding: 12px;
+    }
+}
+
+
+
+/* Added auto horizontal scroll for tables */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Buttons color */
+button.editar, .editar {
+    background-color: #007bff !important;
+    color: white !important;
+}
+button.excluir, .excluir {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* Added horizontal scroll for tables */
+.table-container{overflow-x:auto;}
+
+/* force table scroll */
+table{display:block;overflow-x:auto;white-space:nowrap;}
