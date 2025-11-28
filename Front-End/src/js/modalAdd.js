@@ -1,4 +1,4 @@
-// src/js/modalAdd.js
+
 import { adicionarOperador } from "./operadores.js";
 import { gerarId, fecharModais } from "./utils.js";
 
@@ -8,9 +8,9 @@ export function abrirModalAdd() {
     document.getElementById("modal-add").style.display = "flex";
 }
 
-/**
- * Captura dados do modal, cria um novo operador e salva.
- */
+
+ //Captura dados do modal, cria um novo operador e salva.
+ 
 export function salvarNovoOperador() {
     const nomeInput = document.getElementById("add-nome");
     const qualInput = document.getElementById("add-qual");

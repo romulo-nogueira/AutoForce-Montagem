@@ -8,7 +8,7 @@ const funcionarioSchema = new mongoose.Schema({
     required: true,
     enum: [1, 2, 3],
   },
-  matricula: { type: Number, unique: true }, // <-- ADICIONE ISSO
+  matricula: { type: Number, unique: true },
 });
 
 export default mongoose.model("Funcionario", funcionarioSchema);

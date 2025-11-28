@@ -7,16 +7,15 @@ import conectaBanco from "./config/dbConnect.js";
 const app = express();
 
 // Configurar CORS
-// Para produção, troque "*" pelo domínio do seu frontend, ex: "https://meu-frontend.vercel.app"
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
 }));
 
-// Habilitar JSON no body das requisições
+
 app.use(express.json());
 
-// Ativar rotas
+// Ativa rotas
 routes(app);
 
 // Função para iniciar o servidor após conectar ao banco

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Funcionario from "../models/funcionario.js";
 
-// turnoPreferencial é 1, 2 ou 3
+// turnoPreferencial
 function validarTurno(turno) {
     if (turno === undefined) return;
 
@@ -17,9 +17,9 @@ function validarId(id) {
     }
 }
 
-// ===========================
-// CRIAR FUNCIONÁRIO (POST)
-// ===========================
+
+// CRIAR FUNCIONÁRIO
+
 export async function criarFuncionarioService(dados) {
 
     validarTurno(dados.turnoPreferencial);
@@ -48,7 +48,7 @@ export async function listarFuncionariosService(filtro) {
     return await Funcionario.find(filtro);
 }
 
-// ATUALIZAR FUNCIONÁRIO (PUT)
+/* // ATUALIZAR FUNCIONÁRIO (PUT)
 export async function atualizarFuncionarioService(id, dados) {
     validarId(id);
     validarTurno(dados.turnoPreferencial);
@@ -65,9 +65,10 @@ export async function atualizarFuncionarioService(id, dados) {
 
     if (!atualizado) throw new Error("Funcionário não encontrado.");
     return atualizado;
-}
+} */
 
 // ATUALIZAR FUNCIONÁRIO PARCIAL (PATCH)
+
 export async function atualizarFuncionarioParcialService(id, dados) {
     validarId(id);
     validarTurno(dados.turnoPreferencial);
@@ -82,7 +83,8 @@ export async function atualizarFuncionarioParcialService(id, dados) {
     return atualizado;
 }
 
-// DELETAR FUNCIONÁRIO
+// DELETA FUNCIONÁRIO
+
 export async function deletarFuncionarioService(id) {
     validarId(id);
 

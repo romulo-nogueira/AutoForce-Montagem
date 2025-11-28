@@ -1,4 +1,4 @@
-// src/js/escalas.js
+
 import { operadores } from "./operadores.js";
 import {
     apiListarAlocacoes,
@@ -9,9 +9,8 @@ import {
 import { abrirModalAlocar } from "./modalAlocar.js";
 import { atualizarEstatisticasEscala } from "./estatisticas.js";
 
-// ===============================
 // ESTRUTURA DA ESCALA
-// ===============================
+
 export let escalaSemanal = {
     "Segunda":  {1: [], 2: [], 3: []},
     "Terça":    {1: [], 2: [], 3: []},
@@ -27,9 +26,7 @@ window.abrirModalAlocar = abrirModalAlocar;
 window.removerOperadorDaEscala = removerOperadorDaEscala;
 
 
-// ===============================
-// CARREGAR ESCALAS DO BACK-END
-// ===============================
+
 export async function carregarEscalasDoBack() {
     try {
         const alocacoes = await apiListarAlocacoes();
@@ -60,9 +57,9 @@ export async function carregarEscalasDoBack() {
 }
 
 
-// ===============================
-// RENDERIZAR A ESCALA NA TELA
-// ===============================
+
+// RENDERIZA A ESCALA
+
 export function carregarEscalas() {
     const wrapper = document.getElementById("tabela-escala");
     if (!wrapper) return;
@@ -142,9 +139,9 @@ export function carregarEscalas() {
 }
 
 
-// ===============================
+
 // ADICIONAR OPERADOR (ALOCAR)
-// ===============================
+
 
 export async function adicionarOperadorAEscala(dia, turno, operadorId) {
     try {
@@ -154,9 +151,9 @@ export async function adicionarOperadorAEscala(dia, turno, operadorId) {
             turno
         });
 
-        // ⚠️ AQUI: Regra de negócio impedindo a alocação
+        // Regra de negócio impedindo a alocação
         if (resp.erro) {
-            alert(resp.erro); // << ALERTA PARA O USUÁRIO
+            alert(resp.erro); 
             return;
         }
 
@@ -169,9 +166,9 @@ export async function adicionarOperadorAEscala(dia, turno, operadorId) {
 }
 
 
-// ===============================
-// REMOVER ALOCAÇÃO
-// ===============================
+
+// DELETAR ALOCAÇÃO
+
 export async function removerOperadorDaEscala(dia, turno, alocacaoId) {
     const confirmar = confirm("Deseja remover este operador?");
     if (!confirmar) return;

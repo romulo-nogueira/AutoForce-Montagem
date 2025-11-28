@@ -11,7 +11,7 @@ const alocacaoSchema = new mongoose.Schema({
         required: true
     },
     turno: {
-        type: Number,   // <-- CORRETO!
+        type: Number,   
         required: true
     }
 });
