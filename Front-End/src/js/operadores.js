@@ -32,8 +32,7 @@ export async function carregarOperadores() {
                     <button class="btn-edit" onclick="ModalEdit.abrirModalEditar('${op._id}')">Editar</button>
                     <button class="btn-delete" onclick="Operadores.deletarOperador('${op._id}')">Excluir</button>
                     
-                </td>
-            `;
+                </td>`;
 
             tabela.appendChild(linha);
         });

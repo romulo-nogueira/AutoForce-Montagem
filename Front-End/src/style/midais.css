@@ -150,20 +150,22 @@
   /* ======================================================= */
   
   .tabela {
-    width: 100%;
+    /* width: auto; */
     border-collapse: separate;
     border-spacing: 0;
     background-color: var(--surface-color);
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow-light);
+    box-shadow:
+    0 4px 6px rgba(201, 194, 194, 0.13),
+    0 8px 20px rgba(255, 255, 255, 0.301);
     overflow-x: auto;
-  white-space: nowrap;
+    white-space: nowrap;
+    table-layout: auto; 
     
 }
 .tabela-escala-turnos th{
-    padding: 1rem 6.9rem;
-
+    padding: 1rem 7rem;
+  
   }
 
   .tabela thead tr {
@@ -181,11 +183,12 @@
     justify-content: space-between;
   }
   .tabela th {
-    padding: 1rem 6.9rem;
+    padding: 1rem 7.65rem;
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
     border: 2px solid var(--border-color);
+    text-align: center;
   }
   
   .tabela td {
@@ -193,6 +196,7 @@
     padding: 1rem 1.2rem;
     border-bottom: 1px solid var(--border-color);
     font-size: 0.95rem;
+    text-align: center;
   }
   
   .tabela tbody tr:hover {
@@ -209,8 +213,9 @@
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
     transition: color 0.2s, transform 0.1s;
+    
   }
   
   .tabela td button:active {
@@ -245,6 +250,7 @@
     flex-wrap: wrap;
     gap: 0.4rem;
     align-items: center;
+    text-align: center;
   }
   
   .tabela td span[class$="-tag"] { 
@@ -254,6 +260,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: capitalize;
+    text-align: center;
   }
   
   /* Paleta de Cores de Tags */
