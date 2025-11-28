@@ -1,0 +1,284 @@
+
+/* ======================================================= */
+/* 8. MODAIS                                               */
+/* ======================================================= */
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); 
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal.open {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content h3 {
+    color: var(--color-main);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .modal-content input[type="text"],
+  .modal-content select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .modal-content .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .modal-content .actions button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .modal-content .actions button:not(.close) {
+    background-color: var(--color-main);
+    color: white;
+  }
+  
+  .modal-content .actions button.close {
+    background-color: var(--border-color);
+    color: var(--text-color);
+  }
+  
+  .modal-content .actions button:not(.close):hover {
+    background-color: #00b37d;
+  }
+  
+  .modal-content .actions button.close:hover {
+    background-color: #adb5bd;
+  }
+  
+  
+/* ======================================================= */
+/* 5. CARDS GERAIS (Estatísticas de Colaboradores)         */
+/* ======================================================= */
+
+.cards {
+    display: flex;
+    flex-wrap: wrap; /* Garante responsividade básica */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cards > div {
+    flex: 1;
+    min-width: 250px; /* Mínimo para telas menores */
+    padding: 1.5rem;
+    border-radius: 12px;
+    color: white;
+    box-shadow: var(--shadow-light);
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    transition: transform 0.2s;
+  }
+  
+  .cards > div:hover {
+    transform: translateY(-3px);
+  }
+  
+  .cards > div strong {
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cards > div h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    opacity: 0.9;
+  }
+  
+  /* Cores específicas dos cards de Colaboradores */
+  #cards-colaboradores > div:nth-child(1) { 
+    background: linear-gradient(45deg, #2a5298, #007bff); 
+  }
+  #cards-colaboradores > div:nth-child(2) { 
+    background: linear-gradient(45deg, #2ecc71, #28a745); 
+  }
+  #cards-colaboradores > div:nth-child(3) { 
+    background: linear-gradient(45deg, #8e44ad, #6f42c1); 
+  }
+  
+  
+  /* ======================================================= */
+  /* 6. TABELAS (Geral) e Botões                              */
+  /* ======================================================= */
+  
+  .tabela {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    overflow-x: auto;
+  white-space: nowrap;
+    
+}
+.tabela-escala-turnos th{
+    padding: 1rem 6.9rem;
+
+  }
+
+  .tabela thead tr {
+    background-color: var(--background-color); 
+    color: var(--text-muted);
+    text-align: left;
+    border-bottom: 2px solid var(--border-color);
+    
+  }
+
+  .operador-slot-card{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+  }
+  .tabela th {
+    padding: 1rem 6.9rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: 2px solid var(--border-color);
+  }
+  
+  .tabela td {
+    border: 2px solid var(--border-color);
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+  }
+  
+  .tabela tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+  
+  .tabela tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Estilo das ações */
+  .tabela td button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    transition: color 0.2s, transform 0.1s;
+  }
+  
+  .tabela td button:active {
+    transform: scale(0.95);
+  }
+  
+  .btn-add {
+    background-color: var(--color-main);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  }
+  
+  .btn-add:hover {
+    background-color: #5b02ff;
+  }
+  
+  
+  /* ======================================================= */
+  /* 7. ESTILO DAS TAGS DE QUALIFICAÇÃO                      */
+  /* ======================================================= */
+  
+  .tabela td:nth-child(3) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  
+  .tabela td span[class$="-tag"] { 
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 16px; 
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  /* Paleta de Cores de Tags */
+  .tag-montagem, .tag-qualidade, .tag-eletrica {
+    background-color: #007bff15; 
+    color: var(--color-main);
+  }
+  .tag-inspecao, .tag-controle {
+    background-color: #28a74515; 
+    color: var(--color-success);
+  }
+  .tag-solda, .tag-robotica {
+    background-color: #ffc10715; 
+    color: var(--color-warning);
+  }
+  .tag-pintura, .tag-geral {
+    background-color: #6f42c115; 
+    color: var(--color-accent);
+  }
+  .tag-teste {
+    background-color: #dc354515;
+    color: var(--color-danger);
+  }
+  
+  
+/* edit blue, delete red */
+.btn-edit{color:#0066ff!important;}
+.btn-delete{color:#ff3333!important;}

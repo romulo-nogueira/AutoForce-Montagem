@@ -1,0 +1,158 @@
+
+/* ======================================================= */
+/* 9. ESTILO DA ESCALA SEMANAL (Cards e Tabela)            */
+/* ======================================================= */
+
+/* Cards de Estatísticas na Escala */
+#escala .cards {
+    margin-bottom: 2rem;
+  }
+  
+  /* Estilo para os cards de Turno 1, 2 e 3 */
+  #escala .cards > div {
+    background: var(--surface-color); 
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    box-shadow: none;
+    min-height: 80px;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  #escala .cards > div:hover {
+    transform: none; 
+  }
+  
+  #escala .cards > div strong {
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
+  #escala .cards > div h3 {
+     font-size: 0.9rem;
+     color: var(--text-muted);
+  }
+  #escala .cards > div[data-icon]:after {
+    display: none;
+  }
+  
+  /* Indicadores de Cor na Borda (simulando os painéis da foto) */
+  #card-total-alocacoes { border-left: 5px solid var(--color-main); } 
+  #card-turno-1 { border-left: 5px solid #ffc107; } /* Amarelo */
+  #card-turno-2 { border-left: 5px solid #28a745; } /* Verde */
+  #card-turno-3 { border-left: 5px solid #6f42c1; } /* Roxo */
+  
+  
+  /* Estrutura de Escala Semanal (Tabela) */
+  .escala-wrapper {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+  }
+  
+  .tabela-escala-turnos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Corrigido o cabeçalho para ser mais escuro e uniforme como na imagem */
+  .tabela-escala-turnos th {
+    background-color: #1a2a47; /* Azul Escuro (Corrigido para a foto) */
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 1rem 0.5rem;
+    text-align: center;
+  }
+  /* Alinhamento dos sub-títulos dos turnos */
+  .tabela-escala-turnos th span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+  
+  .tabela-escala-turnos td {
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    vertical-align: top;
+  }
+  
+  /* Coluna Dia/Turno */
+  .tabela-escala-turnos td:first-child {
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-right: 1px solid var(--border-color);
+    padding: 1rem 0.5rem;
+    width: 15%; 
+    text-align: left;
+  }
+  
+  .slot-container {
+    padding: 5px;
+    min-height: 120px;
+  }
+  
+  /* Estilo do Card de Operador Alocado (Bloco Azul da Captura 89) */
+  .operador-slot-card {
+    background-color: var(--color-main); 
+    color: white;
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+  
+  .operador-slot-card strong {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+  .operador-slot-card span {
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
+  
+  .operador-slot-card .qualificacoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    margin-top: 0.3rem;
+  }
+  
+  .operador-slot-card .qualificacoes span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    display: inline-block;
+    margin-right: 0.3rem;
+    margin-top: 0.3rem;
+  }
+  
+  .slot-adicionar {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    margin-top: 5px;
+    color: var(--color-main); 
+    border: 1px dashed var(--color-main);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .slot-adicionar:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  
+  .slot-vago {
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.7;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+  }

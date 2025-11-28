@@ -92,7 +92,7 @@ export function carregarEscalas() {
         html += `
             <tr>
                 <td>
-                    <strong>${dia}</strong>
+                    <strong >${dia}</strong>
                     <span class="alocacoes-dia">${total} alocações</span>
                 </td>
         `;
@@ -105,15 +105,18 @@ export function carregarEscalas() {
             lista.forEach(op => {
                 slot += `
                     <div class="operador-slot-card">
-                        <button class="btn-remove"
-                            onclick="removerOperadorDaEscala('${dia}', ${turno}, '${op.alocacaoId}')">
-                            X
-                        </button>
-                        <strong>${op.nome}</strong>
-                        <span>${op.matricula}</span>
-                        <div class="qualificacoes">
-                            ${op.qualificacoes.map(q => `<span>${q}</span>`).join("")}
-                        </div>
+                    <div class="operador-info"> 
+
+                    <strong>${op.nome}</strong>
+                    <span>${op.matricula}</span>
+                    <div class="qualificacoes">
+                    ${op.qualificacoes.map(q => `<span>${q}</span>`).join("")}
+                    </div>
+                    </div>
+                    <button class="btn-remove"
+                        onclick="removerOperadorDaEscala('${dia}', ${turno}, '${op.alocacaoId}')">
+                        ❌
+                    </button>
                     </div>`;
             });
 
